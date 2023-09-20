@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'DJI Mini 3 Pro (DJI RC)',
     image: '/images/dji-mini-3-pro.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'DJI Mini 2 SE',
     image: '/images/dji-mini-2-se.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Potensic ATOM SE',
     image: '/images/potensic-atom-se.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'Ruko F11PRO',
     image: '/images/ruko-f11-pro.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Letcren B5W',
     image: '/images/letcren-b5w.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Potensic Dreamer Pro',
     image: '/images/potensic-dreamer-pro.jpg',
     description:
