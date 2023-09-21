@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import { saveShippingAddress } from '../slices/cartSlice';
-// import CheckoutSteps from '../components/CheckoutSteps';
+import CheckoutSteps from '../components/CheckoutSteps';
 
 function ShippingPage(props) {
   const cart = useSelector((state) => state.cart);
@@ -70,7 +70,7 @@ function ShippingPage(props) {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='my-2'>Continue</Button>
+        <Button type='submit' variant='primary' className='my-2' disabled={!address || !postalCode || !city || !country}>Continue</Button>
       </Form>
     </FormContainer>
   );
