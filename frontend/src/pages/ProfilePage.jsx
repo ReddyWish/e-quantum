@@ -94,8 +94,8 @@ function ProfilePage(props) {
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>
-        { isLoading ? <Loader/> : error ? (<Message variant='danger'>
-          { error?.data?.message || error.error }
+        {isLoading ? <Loader/> : error ? (<Message variant='danger'>
+          {error?.data?.message || error.error}
         </Message>) : (
           <Table striped hover responsive className='table-sm'>
             <thead>
@@ -131,14 +131,14 @@ function ProfilePage(props) {
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
-<Button>Details</Button>
+                    <Button>Details</Button>
                   </LinkContainer>
                 </td>
               </tr>
             ))}
             </tbody>
           </Table>
-        ) }
+        )}
       </Col>
     </Row>
   );

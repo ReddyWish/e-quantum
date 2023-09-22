@@ -3,6 +3,7 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import Product from '../models/productModel.js';
 
 import * as fs from "fs";
+import User from "../models/userModel.js";
 
 
 // @desc Fetch all products
@@ -147,6 +148,27 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Delete review
+// @route DELETE /api/products/:id/reviews/:reviewId
+// @access Private
+const deleteProductReview = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  const review = product.reviews.find(x => (x._id).toString() === req.params.reviewId);
+  const user = await User.findById(req.user._id);
+  if (user.isAdmin || ((review.user).toString() === (req.user._id).toString())) {
+    const editedReviews = product.reviews.filter(x => x._id !== review._id);
+    product.reviews = editedReviews;
+    product.numReviews = editedReviews.length;
+    product.rating = editedReviews.length ? editedReviews.reduce((acc, review) => acc + review.rating, 0) / editedReviews.length : 0;
+
+    await product.save();
+    res.status(201).json({ message: 'Review deleted' });
+  } else {
+    res.status(404);
+    throw new Error('Resource not found')
+  }
+});
+
 // @desc Get top rated products
 // @route GET /api/products/top
 // @access Public
@@ -163,5 +185,6 @@ export {
   updateProduct,
   deleteProduct,
   createProductReview,
+  deleteProductReview,
   getTopProducts
 };

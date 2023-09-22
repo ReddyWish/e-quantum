@@ -5,7 +5,6 @@ import Message from '../components/Message';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import FormContainer from "../components/FormContainer";
 import Loader from '../components/Loader';
 import {
   useGetOrderDetailsQuery,
@@ -193,7 +192,7 @@ function OrderPage(props) {
                     </Row>
                   </ListGroup.Item>
 
-                  { !order.isPaid && (
+                  { (!order.isPaid && !userInfo.isAdmin) &&  (
                     <ListGroup.Item>
                       {loadingPay && <Loader/>}
 

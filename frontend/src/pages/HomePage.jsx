@@ -2,9 +2,11 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import { useGetProductsQuery } from "../slices/productsApiSlice";
-import Message from '../components/Message'
+import Message from '../components/Message';
+import Paginate from '../components/Paginate';
 import Loader from "../components/Loader";
 import Product from '../components/Product';
+import ProductCarousel from '../components/ProductCarousel';
 
 function HomePage() {
   const { pageNumber, keyword } = useParams();
@@ -12,6 +14,7 @@ function HomePage() {
 
   return (
     <>
+      { !keyword ? <ProductCarousel/> : (<Link to='/' className='btn btn-light mb-4'>Go Back</Link>) }
       {isLoading ? (
         <Loader/>
       ) : error ? (
@@ -26,6 +29,7 @@ function HomePage() {
               </Col>
             ))}
           </Row>
+          <Paginate pages={data.pages} page={data.page} keyword={keyword ? keyword : ''}/>
         </>
       )}
     </>

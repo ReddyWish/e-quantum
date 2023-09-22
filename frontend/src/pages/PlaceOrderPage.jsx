@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -13,6 +13,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 function PlaceOrderPage(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [orderPlaced, setOrderPlaced] = useState(false)
   const cart = useSelector((state) => state.cart);
 
   const [ createOrder, { isLoading, error } ] = useCreateOrderMutation();
@@ -36,6 +37,7 @@ function PlaceOrderPage(props) {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
      }).unwrap();
+     setOrderPlaced(true)
      dispatch(clearCartItems());
      navigate(`/order/${res._id}`)
    } catch (err) {
@@ -45,7 +47,7 @@ function PlaceOrderPage(props) {
 
   return (
     <>
-      <CheckoutSteps step1 step2 step3 step4/>
+      <CheckoutSteps step1 step2 step3 step4 orderPlaced={orderPlaced}/>
       <Row>
         <Col md={8}>
          <ListGroup variant='flush'>

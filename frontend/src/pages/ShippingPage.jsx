@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,9 +11,22 @@ function ShippingPage(props) {
   const { shippingAddress } = cart;
 
   const [address, setAddress] = useState(shippingAddress?.address || '');
-  const [city, setCity] = useState(shippingAddress?.city) || '';
+  const [city, setCity] = useState(shippingAddress?.city || '') ;
   const [postalCode, setPostalCode] = useState(shippingAddress?.postalCode || '');
   const [country, setCountry] = useState(shippingAddress?.country || '');
+  const [completed, setCompleted] = useState(false);
+
+  // const completed = !!(address && postalCode && city && country)
+
+  useEffect(() => {
+    if (address && postalCode && city && country) {
+      setCompleted(true)
+    } else {
+      setCompleted(false)
+    }
+  }, [address, city, postalCode, country]);
+
+console.log(completed)
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +39,7 @@ function ShippingPage(props) {
 
   return (
     <FormContainer>
-      <CheckoutSteps step1 step2/>
+      <CheckoutSteps step1 step2 step2Completed={completed} />
       <h1>Shipping</h1>
 
       <Form onSubmit={submitHandler}>
@@ -70,7 +83,7 @@ function ShippingPage(props) {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='my-2' disabled={!address || !postalCode || !city || !country}>Continue</Button>
+        <Button type='submit' variant='primary' className='my-2' disabled={!completed}>Continue</Button>
       </Form>
     </FormContainer>
   );
