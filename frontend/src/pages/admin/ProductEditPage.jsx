@@ -26,7 +26,7 @@ function ProductEditPage(props) {
 
   const [updateProduct, { isLoading: loadingUpdate }] = useUpdateProductMutation(productId);
 
-  const [uploadProductImage] = useUploadProductImageMutation();
+  const [uploadProductImage, { isLoading: loadingUpload }] = useUploadProductImageMutation();
 
   const navigate = useNavigate();
 
@@ -109,6 +109,7 @@ function ProductEditPage(props) {
               <Form.Label>Image</Form.Label>
               <Form.Control type='text' placeholder='Enter image url' value={image} onChange={(e) => setImage(e.target.value)}></Form.Control>
               <Form.Control type='file' label='Choose file' onChange={uploadFileHandler}></Form.Control>
+              {loadingUpload && <Loader />}
             </Form.Group>
 
             <Form.Group controlId='brand' className='my-2'>
