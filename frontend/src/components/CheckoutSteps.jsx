@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 function CheckoutSteps({ step1, step2, step3, step4, orderPlaced }) {
   const step1Completed = localStorage.getItem('userInfo');
   const step2Completed = JSON.parse(localStorage.getItem('cart')).shippingAddress;
-  console.log(step2Completed)
+
   return (
     <Nav className='justify-content-center mb-4'>
       <Nav.Item>

@@ -26,8 +26,6 @@ function ShippingPage(props) {
     }
   }, [address, city, postalCode, country]);
 
-console.log(completed)
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

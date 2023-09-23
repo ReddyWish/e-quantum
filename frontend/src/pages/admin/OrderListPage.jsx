@@ -8,7 +8,7 @@ import { useGetOrdersQuery } from '../../slices/ordersApiSlice'
 
 function OrderListPage(props) {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
-  console.log(orders);
+
   return (
     <>
       <h1>Orders</h1>
